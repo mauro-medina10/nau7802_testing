@@ -4,10 +4,12 @@ cmake_minimum_required(VERSION 3.20.0)
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(i2c_fujitsu_fram)
 
-include_directories("../boards/nrf52833dk/BSP")
+include_directories("../boards/nrf52833dk/BSP"
+                    "../lib/Drivers")
 
 add_compile_definitions(DEBUG)
 
 FILE(GLOB app_sources src/*.c)
 target_sources(app PRIVATE ${app_sources}
-                ../boards/nrf52833dk/BSP/nrf52833dk_bsp.c)
+                ../boards/nrf52833dk/BSP/nrf52833dk_bsp.c
+                ../lib/Drivers/Drv_I2C.c)
