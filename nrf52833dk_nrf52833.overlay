@@ -1,0 +1,50 @@
+// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+
+// You can also use the buttons in the sidebar to perform actions on nodes.
+// Actions currently available include:
+
+// * Enabling / disabling the node
+// * Adding the bus to a bus
+// * Removing the node
+// * Connecting ADC channels
+
+// For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
+// You can also visit the nRF DeviceTree extension documentation at https://nrfconnect.github.io/vscode-nrf-connect/devicetree/nrfdevicetree.html
+/ {
+	arduino_header: connector {
+		status = "disabled";
+	};
+};
+
+&pinctrl {
+	i2c1_nau7802: i2c1_nau7802 {
+		group1 {
+			psels = <NRF_PSEL(TWIM_SDA, 0, 31)>,
+				<NRF_PSEL(TWIM_SCL, 0, 30)>;
+			bias-disable;	
+		};
+	};  
+    i2c1_sleep: i2c1_sleep {
+		group1 {
+			psels = <NRF_PSEL(TWIM_SDA, 0, 31)>,
+				<NRF_PSEL(TWIM_SCL, 0, 30)>;
+			low-power-enable;
+		};
+	};  
+};
+
+&i2c0 {
+    status = "disabled";
+};
+
+&i2c1 {
+    status = "okay";
+    compatible = "nordic,nrf-twi";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+    pinctrl-0 = <&i2c1_nau7802>;
+ 
+    nau7802:nau7802@2A {
+        label = "NAU7802 ADC addr 0x2A";
+        reg = < 0x2a >;
+    };
+};
