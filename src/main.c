@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Intel Corporation
+ * Copyright (c) 2022 Mauro Medina Serangeli
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -111,7 +111,7 @@ static int32_t nau7802_setRegister(uint8_t registerAddress, uint8_t value)
 //Get contents of a register
 static int32_t nau7802_getRegister(uint8_t registerAddress, uint8_t *data)
 {
-	if(I2C_byte_read(registerAddress, data)){
+	if(I2C_byte_read(registerAddress, data) == 0){
 		
 		return 0;
 	}
