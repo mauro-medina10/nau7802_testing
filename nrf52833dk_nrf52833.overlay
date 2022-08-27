@@ -44,6 +44,7 @@
     pinctrl-0 = <&i2c1_nau7802>;
 	
     nau7802:nau7802@2A {
+		compatible = "nuvoton,nau7802";
         label = "NAU7802 ADC addr 0x2A";
         reg = < 0x2a >;
     };

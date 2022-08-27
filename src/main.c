@@ -82,6 +82,8 @@ void main(void)
 
 	bsp_init(button0_pressed, button1_pressed, button2_pressed, button3_pressed);
 
+	nau7802 = device_get_binding(DT_LABEL(DT_INST(0, nuvoton_nau7802)));
+
 	// nau7802_powerUp();
 
 	// do
